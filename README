@@ -1,6 +1,6 @@
 Step 1: Add Flathub
 
-	flatpak remote-add --if-not-exists flathub \
+	flatpak remote-add --user --if-not-exists flathub \
 	https://dl.flathub.org/repo/flathub.flatpakrepo
 
 Step 2: Build and install locally
