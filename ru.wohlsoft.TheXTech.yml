@@ -43,6 +43,7 @@ modules:
       - /lib/cmake/
       - /lib/debug/
       - /lib/pkgconfig/
+      - /share/applications/thextech.desktop
 finish-args:
   - --device=dri
   - --device-if=all:!has-input-device
