@@ -1,0 +1,10 @@
+Making a local build:
+
+  flatpak-builder --user --install-deps-from=flathub --force-clean \
+      --repo=repo --install builddir ru.wohlsoft.TheXTech.yml
+
+Running:
+
+  flatpak run ru.wohlsoft.WohlSoft
+
+
