@@ -1,0 +1,55 @@
+id: ru.wohlsoft.TheXTech
+runtime: org.freedesktop.Platform
+runtime-version: '25.08'
+sdk: org.freedesktop.Sdk
+command: thextech
+modules:
+  - name: thextech
+    buildsystem: simple
+    builddir: true
+    sources:
+      - type: archive
+        url: https://github.com/TheXTech/TheXTech/releases/download/v1.3.7.3-1/thextech-full-src-v1.3.7.3.tar.bz2
+        sha256: 0febed04fd799c2fa70d716af741ef5df03534e3fc21951ee9096fa1c6e7fe57
+      - type: patch
+        path: git-version.patch
+      - type: file
+        path: ru.wohlsoft.TheXTech.desktop
+    build-commands:
+      - cmake -G Ninja
+        -DCMAKE_BUILD_TYPE=MinSizeRel
+        -DFLATPAK_BUILD=ON
+        -DOVERRIDE_GIT_BRANCH="\<flathub\>"
+        -DPGE_SHARED_SDLMIXER=OFF
+        -DUSE_SYSTEM_SDL2=ON
+        -DUSE_SYSTEM_ZLIB=ON
+        -DUSE_FREEIMAGE_SYSTEM_LIBS=ON
+        .
+      - ninja
+      - cp -r output/bin/ /app/bin/
+      - cp -r output/lib/ /app/lib/
+      - cp -r output/share/ /app/share/
+      - install -Dp LICENSE /app/share/doc/thextech/License.TheXTech.txt
+      - install -Dp README.md /app/share/doc/thextech/ReadMe.txt
+      - install -Dp changelog.txt /app/share/doc/thextech/changelog.txt
+      - install -Dp resources/icon/thextech_512.png /app/share/icons/hicolor/512x512/apps/ru.wohlsoft.TheXTech.png
+      - install -Dp resources/icon/thextech_256.png /app/share/icons/hicolor/256x256/apps/ru.wohlsoft.TheXTech.png
+      - install -Dp resources/icon/thextech_128.png /app/share/icons/hicolor/128x128/apps/ru.wohlsoft.TheXTech.png
+      - install -Dp resources/icon/thextech_48.png /app/share/icons/hicolor/48x48/apps/ru.wohlsoft.TheXTech.png
+      - install -Dp resources/icon/thextech_32.png /app/share/icons/hicolor/32x32/apps/ru.wohlsoft.TheXTech.png
+      - install -Dp resources/icon/thextech_16.png /app/share/icons/hicolor/16x16/apps/ru.wohlsoft.TheXTech.png
+      - desktop-file-install --dir=/app/share/applications ru.wohlsoft.TheXTech.desktop
+    cleanup:
+      - /lib/cmake/
+      - /lib/debug/
+      - /lib/pkgconfig/
+finish-args:
+  - --device=dri
+  - --device-if=all:!has-input-device
+  - --device=input
+  - --socket=wayland
+  - --nosocket=x11
+  - --socket-if=x11:!has-wayland
+  - --socket=pulseaudio
+  - --share=ipc
+  - --filesystem=xdg-run/app/com.discordapp.Discord:create

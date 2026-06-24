@@ -1,0 +1,14 @@
+[Desktop Entry]
+Name=TheXTech
+GenericName=TheXTech
+Comment=TheXTech Runtime Engine
+Encoding=UTF-8
+Version=1.0
+Type=Application
+Terminal=false
+Icon=ru.wohlsoft.TheXTech
+Exec=thextech @F
+X-Purism-FormFactor=Workstation;Mobile;
+Categories=Game;
+StartupWMClass=thextech
+
