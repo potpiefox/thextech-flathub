@@ -1,10 +1,13 @@
-Making a local build:
+Step 1: Add Flathub
 
-  flatpak-builder --user --install-deps-from=flathub --force-clean \
-      --repo=repo --install builddir ru.wohlsoft.TheXTech.yml
+	flatpak remote-add --if-not-exists flathub \
+	https://dl.flathub.org/repo/flathub.flatpakrepo
 
-Running:
+Step 2: Build and install locally
 
-  flatpak run ru.wohlsoft.WohlSoft
+	flatpak-builder --user --install-deps-from=flathub --force-clean \
+	--repo=repo --install builddir ru.wohlsoft.TheXTech.yml
 
+Step 3: Run
 
+	flatpak run ru.wohlsoft.TheXTech
